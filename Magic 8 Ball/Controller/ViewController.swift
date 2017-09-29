@@ -11,9 +11,12 @@ import UIKit
 class ViewController: UIViewController {
 
 
+    @IBOutlet weak var magicBall: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        generateAnswer()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -22,8 +25,19 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    func generateAnswer() {
+        print("randomize")
+        
+        let index = arc4random_uniform(4) + 1 // since 0-4 random return so +1 to make it 5
+        magicBall.image = UIImage(named:"ball\(index)")
+    }
+    
     @IBAction func askButton(_ sender: Any) {
+        generateAnswer()
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        generateAnswer()
     }
 }
 
